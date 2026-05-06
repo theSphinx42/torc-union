@@ -382,7 +382,11 @@ function fallbackCopy(text, onSuccess) {
 
 /* ═══════════════════════════════════════════════════════════
    EMAIL SIGNUP
+   Formspree integration — replace FORMSPREE_ID with your
+   form ID from formspree.io/dashboard (e.g. "xpwzabcd")
 ═══════════════════════════════════════════════════════════ */
+
+const FORMSPREE_ID = 'xrejkaop';
 
 function initSignupForm() {
     const form    = document.getElementById('signupForm');
@@ -391,7 +395,7 @@ function initSignupForm() {
     const success = document.getElementById('signupSuccess');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = input.value.trim();
 
@@ -406,12 +410,35 @@ function initSignupForm() {
         error.hidden = true;
         input.classList.remove('is-error');
         input.setAttribute('aria-invalid', 'false');
-        success.hidden = false;
-        form.querySelector('.signup-row').hidden = true;
-        form.querySelector('.signup-privacy').hidden = true;
 
-        /* TODO: wire to email service (Mailchimp, ConvertKit, etc.) */
-        console.log('Signup:', email);
+        /* Optimistic UI — show loading state */
+        const btn = form.querySelector('.signup-btn');
+        const originalText = btn.textContent;
+        btn.textContent = 'Joining…';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body:    JSON.stringify({ email }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.ok) {
+                success.hidden = false;
+                form.querySelector('.signup-row').hidden = true;
+                form.querySelector('.signup-privacy').hidden = true;
+            } else {
+                throw new Error(data.error || 'Submission failed');
+            }
+        } catch (_) {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            error.textContent = 'Something went wrong — please try again.';
+            error.hidden = false;
+        }
     });
 
     input.addEventListener('input', () => {
