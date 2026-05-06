@@ -339,7 +339,7 @@ function DecisionRouter() {
           id="router-input"
           type="text"
           className="router-input"
-          placeholder="Describe a decision, e.g. "Should we open a second location?""
+          placeholder={'Describe a decision, e.g. "Should we open a second location?"'}
           value={query}
           onChange={e => setQuery(e.target.value)}
           onKeyDown={onKey}

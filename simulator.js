@@ -457,7 +457,7 @@ const SCENARIOS = [
     },
   },
 
-  // ── 5. Automated Shift Scheduling — OPERATIONAL (stub) ────────────────
+  // ── 5. Automated Shift Scheduling — OPERATIONAL ────────────────────────
   {
     id: 'operational-scheduling',
     title: 'Automated Shift Scheduling',
@@ -467,39 +467,167 @@ const SCENARIOS = [
     tier: 'OPERATIONAL',
 
     situation: {
-      headline: '[Coming soon — Operational tier scenario]',
-      context: 'AI manages daily shift scheduling autonomously within worker-set parameters: max hours, preferred shifts, overtime caps. Workers set the rules quarterly — AI executes them.',
-      stakes: 'Daily operations for 340 workers',
+      headline: 'Daily scheduling for 240 warehouse workers. AI handles it in 15 minutes. Workers set the rules — quarterly.',
+      context: 'Clearwater Logistics runs three shifts covering a 24/7 warehouse operation. For years, a shift manager spent 6 hours every day manually building schedules — picking who worked when, often inconsistently, often with complaints about favoritism. Workers voted to implement AI-managed scheduling within parameters they set and review every quarter.',
+      stakes: 'Fair, consistent schedules for 240 warehouse workers. $18,000/month in avoidable overtime. Work-life balance for the whole team.',
       urgency: 'LOW',
-      timeframe: 'Ongoing',
+      timeframe: 'Ongoing daily execution — quarterly parameter review',
     },
 
     aiAnalysis: {
-      process: [],
-      options: [],
+      process: [
+        {
+          step: 1,
+          label: 'Collect real-time data',
+          detail: 'AI pulls time-off requests, sick calls, updated worker shift preferences, order volume forecast for coverage requirements, and checks labor law compliance windows (break minimums, max consecutive days). Runs automatically at 6:00 PM every day.',
+        },
+        {
+          step: 2,
+          label: 'Run optimization algorithm',
+          detail: 'Balances all worker-set parameters simultaneously: 40-hour weekly cap, shift preference rankings, 80-worker minimum coverage per shift, 6-day consecutive max, 15% seniority weighting for 2+ year workers, and 60%+ preferred-shift fulfillment over any 4-week window. No manager judgment calls — just the rules workers agreed on.',
+        },
+        {
+          step: 3,
+          label: 'Execute and notify (no approval needed)',
+          detail: 'Schedule posted by 8:00 PM, 48 hours in advance. Workers receive text, email, and app notification. All 240 workers can view their schedule, request swaps (AI validates compliance before approving), and log disputes through the review process. Every decision is logged for full audit trail.',
+        },
+        {
+          step: 4,
+          label: 'Handle exceptions automatically',
+          detail: 'If any parameter would be violated (e.g., covering an emergency would push a worker past 40 hours), AI escalates to Tier 2 for manager approval — never silently breaks its own rules. Volunteers for overtime are identified and notified. Emergency coverage suggestions include estimated overtime cost before manager approves.',
+        },
+      ],
+      options: [
+        {
+          id: 'keep-current',
+          name: 'Option A — Keep Current Parameters',
+          attrs: [
+            { label: 'Fairness Score',        value: '94 / 100',           sentiment: 'positive' },
+            { label: 'Preferred Shift Rate',  value: '67% (target: 60%+)', sentiment: 'positive' },
+            { label: 'Change Required',       value: 'None',               sentiment: 'positive' },
+            { label: 'Implementation Risk',   value: 'Zero',               sentiment: 'positive' },
+          ],
+          pros: [
+            'System already performs above all targets',
+            'No disruption to workers who have adapted to current rules',
+            'Quarterly review confirms it is working — no fix needed',
+          ],
+          cons: [
+            'Does not address newer workers who want more influence over shift preferences',
+            'Seniority weighting may feel unfair to high-performers with less tenure',
+          ],
+          workerImpact: 'Status quo maintained. Workers continue receiving preferred shifts 67% of the time with zero favoritism complaints.',
+          chosen: true,
+        },
+        {
+          id: 'seniority-increase',
+          name: 'Option B — Increase Seniority Weight',
+          attrs: [
+            { label: 'Seniority Weight',      value: '15% → 25%',          sentiment: 'neutral' },
+            { label: 'Impact on New Workers', value: 'Moderate reduction',  sentiment: 'negative' },
+            { label: 'Fairness Score (est.)', value: '88 / 100',           sentiment: 'neutral' },
+            { label: 'Senior Worker Benefit', value: 'High',               sentiment: 'positive' },
+          ],
+          pros: [
+            'Rewards long-term loyalty and retention of experienced workers',
+            'Stronger incentive to stay at Clearwater past 2 years',
+          ],
+          cons: [
+            'Reduces preferred-shift access for newer workers',
+            'Could hurt recruitment — worse schedule experience for new hires',
+            'Fairness score drops from 94 to estimated 88',
+          ],
+          workerImpact: 'Workers with 2+ years tenure gain better shift access. Workers under 2 years see a meaningful reduction in preferred shift fulfillment.',
+          chosen: false,
+        },
+        {
+          id: 'weekend-premium',
+          name: 'Option C — Add Weekend Volunteer Premium',
+          attrs: [
+            { label: 'Weekend Coverage',      value: 'Est. +18% volunteers', sentiment: 'positive' },
+            { label: 'Algorithm Complexity',  value: 'High',                 sentiment: 'negative' },
+            { label: 'Fairness Score (est.)', value: '91 / 100',             sentiment: 'positive' },
+            { label: 'Implementation Time',   value: '3–4 weeks',            sentiment: 'neutral' },
+          ],
+          pros: [
+            'Solves weekend coverage shortfall without mandatory assignment',
+            'Workers who volunteer weekends earn priority on weekday preferences — fair trade',
+            'Reduces need for overtime escalations on Saturdays',
+          ],
+          cons: [
+            'Adds significant complexity to the optimization algorithm',
+            'Workers without weekend flexibility get de-prioritized for weekday preferences',
+            'Takes 3–4 weeks to implement and test safely',
+          ],
+          workerImpact: 'Workers with weekend availability gain a meaningful advantage for weekday shift preferences. Workers without that flexibility may see a slight reduction in preferred-shift access.',
+          chosen: false,
+        },
+      ],
     },
 
     decisionProcess: {
       steps: [
-        { actor: 'AI System', action: '[Scenario content coming soon]', duration: '', type: 'ai' },
+        {
+          actor: 'AI System (Daily)',
+          action: 'Collects availability data, sick calls, and shift preferences at 6:00 PM. Runs optimization across all 240 workers against worker-approved parameters.',
+          duration: '15 minutes',
+          type: 'ai',
+        },
+        {
+          actor: 'AI System (Daily)',
+          action: 'Posts full schedule for next 48 hours. Sends notifications to all 240 workers. Logs every decision for audit. Any worker can trigger the swap or dispute process.',
+          duration: 'Instant',
+          type: 'ai',
+        },
+        {
+          actor: 'All 240 Workers (Quarterly)',
+          action: 'Quarterly parameter review: workers receive AI analysis of 3 proposed parameter changes. Four weeks of discussion via internal forums before vote.',
+          duration: '4 weeks',
+          type: 'human',
+        },
+        {
+          actor: 'All 240 Workers (Quarterly)',
+          action: 'Workers vote on whether to change the scheduling parameters. Any change requires majority approval — the AI cannot adjust its own rules without worker authorization.',
+          duration: '3 days',
+          type: 'vote',
+        },
       ],
-      voteResults: null,
-      decision: null,
+      voteResults: {
+        total: { yes: 173, total: 240, pct: 72 },
+        breakdown: [
+          { group: 'Warehouse (Day Shift)',   yes: 67, total: 88,  pct: 76 },
+          { group: 'Warehouse (Night Shift)', yes: 58, total: 90,  pct: 64 },
+          { group: 'Delivery & Logistics',    yes: 48, total: 62,  pct: 77 },
+        ],
+      },
+      decision: {
+        chosen: 'Option A — Keep Current Parameters (approved by 72%)',
+        chosenBy: 'All 240 worker-members, quarterly vote',
+        rationale: 'The system is working. We set the rules and the AI follows them — fairness score is 94/100 and shift complaints are down 82%. We will revisit the weekend premium next quarter when the team has had more time to evaluate it.',
+      },
     },
 
     outcome: {
-      result: '[Coming soon]',
-      metrics: [],
-      workerImpact: '',
-      keyInsight: '',
+      result: 'Workers voted 72% to keep current scheduling parameters unchanged. AI continues daily autonomous execution — schedule delivered in 15 minutes vs. 6 hours manually. Zero favoritism complaints since launch.',
+      timeToResolve: '15 min / day',
+      metrics: [
+        { label: 'Daily schedule time',   value: '15 min',    change: 'positive' },
+        { label: 'Overtime savings',      value: '-$18k/mo',  change: 'positive' },
+        { label: 'Coverage gaps',         value: '0.02%',     change: 'positive' },
+        { label: 'Fairness score',        value: '94 / 100',  change: 'positive' },
+        { label: 'Preferred shift rate',  value: '67%',       change: 'positive' },
+        { label: 'Compliance violations', value: '0 / month', change: 'positive' },
+      ],
+      workerImpact: '240 warehouse workers receive fair, consistent, predictable schedules without favoritism. 82% drop in scheduling complaints. 12% improvement in retention — workers stay longer when scheduling is reliable and fair. Shift manager freed from 6-hour daily task, reassigned to worker training program.',
+      keyInsight: 'The Operational tier shows AI performing routine tasks faster, fairer, and more consistently than human managers — while workers retain complete control. They did not hand power to the AI. They wrote the rules, tested them, and the AI executes their decisions at scale every single day. The quarterly review is where the real power lives.',
     },
 
     ceoApproach: {
-      action: '[Coming soon]',
-      rationale: '',
-      timeline: '',
-      outcome: '[Coming soon]',
-      workerImpact: '',
+      action: 'Assign a shift manager to manually build daily schedules using a spreadsheet or whiteboard. Manager weighs shift coverage requirements against worker requests based on personal judgment.',
+      rationale: 'Traditional view: scheduling requires human judgment. Managers know the workers and the dynamics. Subjective decisions can be made in context.',
+      timeline: '6 hours/day, every day, 365 days/year',
+      outcome: 'Manager builds schedule in 6+ hours per day. Coverage gaps occur 3.8% of shifts. Overtime costs $42k/month (vs. $24k AI-managed). Favoritism complaints average 28/month. Labor law compliance violations: 4–6/month. Turnover higher — unpredictable schedules drive workers to leave.',
+      workerImpact: 'Workers get schedules with little predictability. Preferred shifts go to favorites. Night shift workers get stuck permanently. No audit trail — workers cannot challenge decisions. Complaints go to the same manager who made the schedule. Turnover runs 12% higher than AI-managed scheduling.',
     },
   },
 ];
