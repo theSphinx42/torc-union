@@ -1426,6 +1426,240 @@ em { font-style: normal; }
     .ai-callout { flex-direction: column; }
 }
 
+/* ── SIMULATOR PREVIEW SECTION (homepage) ────────────────── */
+.sim-preview-section {
+    background: var(--white);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.sim-preview-intro {
+    max-width: 60ch;
+    margin-bottom: var(--s10);
+}
+
+/* 3-card scenario grid */
+.sim-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s6);
+    margin-bottom: var(--s8);
+}
+
+.sim-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+    padding: var(--s6);
+    background: var(--navy);
+    border-radius: var(--r-xl);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.sim-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+}
+.sim-card:hover,
+.sim-card:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(13,27,62,0.22);
+    outline: none;
+}
+.sim-card:focus-visible {
+    box-shadow: 0 0 0 3px var(--gold), 0 12px 32px rgba(13,27,62,0.22);
+}
+
+.sim-card__tier {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--r-full);
+    width: fit-content;
+}
+.sim-card__tier--tactical {
+    color: var(--gold-light);
+    background: rgba(200,146,42,0.14);
+    border: 1px solid rgba(200,146,42,0.30);
+}
+.sim-card__tier--strategic {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+}
+.sim-card__tier--constitutional {
+    color: #F87171;
+    background: rgba(220,38,38,0.12);
+    border: 1px solid rgba(220,38,38,0.28);
+}
+
+.sim-card__title {
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin: 0;
+}
+
+.sim-card__desc {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.65;
+    flex: 1;
+}
+
+.sim-card__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-top: var(--s4);
+    border-top: 1px solid rgba(255,255,255,0.10);
+}
+.sim-card__stat-value {
+    font-size: 1.625rem;
+    font-weight: 900;
+    color: var(--gold-light);
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+.sim-card__stat-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+    font-weight: 400;
+}
+
+.sim-card__cta {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.02em;
+    margin-top: var(--s2);
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.sim-preview-cta-row {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--s6);
+}
+.sim-preview-cta-row .btn,
+.gov-preview-cta-row .btn {
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    text-decoration: none;
+}
+
+/* ── GOVERNANCE FRAMEWORK PREVIEW (homepage) ─────────────── */
+.gov-preview-section {
+    background: var(--papyrus);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.gov-preview-intro {
+    max-width: 56ch;
+    margin-bottom: var(--s10);
+}
+
+.gov-tier-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s4);
+    margin-bottom: var(--s8);
+}
+
+.gov-tier-chip {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s3);
+    padding: var(--s4) var(--s5);
+    border-radius: var(--r-lg);
+    border: 1px solid transparent;
+}
+.gov-tier-chip strong {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
+}
+.gov-tier-chip span {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    opacity: 0.78;
+}
+.gov-tier-chip__num {
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    margin-top: 0.125rem;
+}
+
+.gov-tier-chip--op {
+    background: rgba(45,125,79,0.08);
+    border-color: rgba(45,125,79,0.22);
+    color: #1B5E38;
+}
+.gov-tier-chip--op .gov-tier-chip__num { background: rgba(45,125,79,0.18); color: #1B5E38; }
+
+.gov-tier-chip--tac {
+    background: rgba(200,146,42,0.08);
+    border-color: rgba(200,146,42,0.24);
+    color: var(--gold-text);
+}
+.gov-tier-chip--tac .gov-tier-chip__num { background: rgba(200,146,42,0.20); color: var(--gold-text); }
+
+.gov-tier-chip--str {
+    background: rgba(13,27,62,0.06);
+    border-color: rgba(13,27,62,0.18);
+    color: var(--navy);
+}
+.gov-tier-chip--str .gov-tier-chip__num { background: rgba(13,27,62,0.12); color: var(--navy); }
+
+.gov-tier-chip--con {
+    background: rgba(220,38,38,0.06);
+    border-color: rgba(220,38,38,0.20);
+    color: #9B1C1C;
+}
+.gov-tier-chip--con .gov-tier-chip__num { background: rgba(220,38,38,0.14); color: #9B1C1C; }
+
+.gov-preview-cta-row {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Responsive — sim cards + gov tiers */
+@media (max-width: 900px) {
+    .sim-card-grid { grid-template-columns: 1fr 1fr; }
+    .gov-tier-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+    .sim-card-grid { grid-template-columns: 1fr; }
+    .gov-tier-row { grid-template-columns: 1fr; }
+}
+
 /* ── PRINT ───────────────────────────────────────────────── */
 @media print {
     .site-header, .hero, .problem-section,
