@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check \"/home/jeffreysphinxwalker/Desktop/Torc the Ai Union Engine/calculator.js\")",
+      "Bash(awk '/^:root/,/^}/' \"/home/jeffreysphinxwalker/Desktop/Torc the Ai Union Engine/styles.css\")",
+      "Bash(grep \"background\\\\|{$\")",
+      "Bash(file \"/home/jeffreysphinxwalker/Desktop/Torc the Ai Union Engine/assets/icons/\"*.png)",
+      "Bash(python3 -c \"from PIL import Image; img=Image.open\\('/home/jeffreysphinxwalker/Desktop/Torc the Ai Union Engine/assets/icons/TorcGraphics10.png'\\); print\\(img.size, img.mode\\)\")",
+      "Bash(node *)"
+    ]
+  }
+}
